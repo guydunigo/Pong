@@ -1,5 +1,5 @@
 #-- program name, sources and obj --
-TARGET=Appli
+TARGET=Pong
 SRC=$(wildcard src/*.cpp)
 OBJ=$(SRC:.cpp=.o)
 

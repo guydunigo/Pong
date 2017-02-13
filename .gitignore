@@ -1,4 +1,5 @@
 *.o
 SFML_GNU_Linux
-SFML_Windows_Sources
 *.swp
+Pong
+Pong.exe
