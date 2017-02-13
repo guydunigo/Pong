@@ -7,13 +7,12 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 		addCirc(new Circle(std::rand()%500,0,10+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100,std::rand()%100, std::rand()%20 - 10));
 
 	addRect(new Rectangle(20,500,100,100,255,0,0, rand()%100, rand()%100));
+	addTrig(new Triangle(20,500,100,255,255,255,0,0,0));
 }
 
 Pong::~Pong(void) {
-	for (unsigned int i = 0 ; i < rects.size() ; i++)
-		delete rects[i];
-	for (unsigned int i = 0 ; i < circs.size() ; i++)
-		delete circs[i];
+	for (unsigned int i = 0 ; i < shapes.size() ; i++)
+		delete shapes[i];
 }
 
 unsigned int Pong::getWidth(void) const {
@@ -42,25 +41,28 @@ void Pong::setGravityY(float val) {
 }
 
 void Pong::moveAll(float dx, float dy) {
-	for (unsigned int i = 0 ; i < rects.size() ; i++)
-		rects[i]->move(dx, dy);
-	for (unsigned int i = 0 ; i < circs.size() ; i++)
-		circs[i]->move(dx, dy);
+	for (unsigned int i = 0 ; i < shapes.size() ; i++)
+		shapes[i]->move(dx, dy);
 }
 
 void Pong::drawAll(sf::RenderWindow *win) const {
-	for (unsigned int i = 0 ; i < rects.size() ; i++)
-		rects[i]->draw(win);
-	for (unsigned int i = 0 ; i < circs.size() ; i++)
-		circs[i]->draw(win);
+	for (unsigned int i = 0 ; i < shapes.size() ; i++)
+		shapes[i]->draw(win);
 }
 
 void Pong::addRect(Rectangle* rect) {
 	rects.push_back(rect);
+	shapes.push_back(rect);
 }
 
 void Pong::addCirc(Circle* circ) {
 	circs.push_back(circ);
+	shapes.push_back(circ);
+}
+
+void Pong::addTrig(Triangle* trig) {
+	trigs.push_back(trig);
+	shapes.push_back(trig);
 }
 
 void Pong::step(float dt) {

@@ -4,6 +4,7 @@
 #include <vector>
 #include "Rectangle.h"
 #include "Circle.h"
+#include "Triangle.h"
 
 #define NB_BALLS	4
 
@@ -14,8 +15,10 @@ class Pong {
 	private:
 		int width, height;
 		float gravityX, gravityY;
+		std::vector<Shape*> shapes;
 		std::vector<Rectangle*> rects;
 		std::vector<Circle*> circs;
+		std::vector<Triangle*> trigs;
 
 	public:
 		Pong(int _width = 0, int _height = 0, float _gravityX = 0, float _gravityY = ACCg);
@@ -33,6 +36,7 @@ class Pong {
 
 		void addRect(Rectangle*);
 		void addCirc(Circle*);
+		void addTrig(Triangle*);
 		
 		void moveAll(float, float);
 		void drawAll(sf::RenderWindow *win) const;

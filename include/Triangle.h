@@ -21,5 +21,4 @@ class Triangle : public Shape {
         void step(float, float, float, std::vector<Rectangle*> &, std::vector<Circle*> &, float,    float);
         void draw(sf::RenderWindow *win) const;
 };
-
 #endif
