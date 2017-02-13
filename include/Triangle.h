@@ -1,0 +1,25 @@
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
+#include "Shape.h"
+class Circle;
+class Rectangle;
+
+class Triangle : public Shape {
+    protected :
+        float radius,rotZ, alpha;
+    public:
+        Triangle(float posX = 0,float posY = 0, float _radius = 0, int r = 0, int g = 0, int b = 0, float celX = 0, float celY = 0, float _rotZ = 0);
+        ~Triangle(void){}
+
+		float getRotZ(void) const;
+		float getRadius(void) const;
+		void setRotZ(float);
+		void setRadius(float);
+
+        void updateMass(void);
+        void step(float, float, float, std::vector<Rectangle*> &, std::vector<Circle*> &, float,    float);
+        void draw(sf::RenderWindow *win) const;
+};
+
+#endif
