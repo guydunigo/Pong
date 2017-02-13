@@ -56,9 +56,10 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	for (i = 0;i < 2; i++) {
 		new_cel[i] = cel[i] + gravity[i] * dt;
 		new_pos[i] = pos[i] + new_cel[i] * dt;
+	//new_pos[i] = pos[i];
 		norm[i] = tang[i] = 0;
 	}
-	alpha += rotZ*dt*360/(3.14159*2);
+	//alpha += rotZ*dt*360/(3.14159*2);
 	if (alpha > 360) alpha -= 360;
 	if (alpha < -360) alpha += 360;
 
@@ -97,13 +98,70 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	}
 
 	// Bouncing against Rectangles
-	for (unsigned int i = 0 ; i < 0*rects.size() ; i++) {
+	for (unsigned int i = 0 ; i < rects.size() ; i++) {
 		rec = rects[i];
-		(void)rec;
 		// Detect if in the rect
-		if (0)
+		if (1)
 		{
-
+			// Components of the vector from the ball to the other one :
+			a = new_pos[0] + radius - rec->getX() - rec->getWidth()/2;
+			b = new_pos[1] + radius - rec->getY() - rec->getHeight()/2;
+			c = sqrtf(a*a+b*b);  //Norm of this vector
+			// Unit vector from this :
+			norm[0] = a/c;
+			norm[1] = b/c;
+			// Angle :
+			d = std::atan(b/a);
+			// Vertical collision : 
+			if ((new_pos[0] + radius > rec->getX() && new_pos[0] + radius < rec->getX() + rec->getWidth()) 
+				&& (new_pos[1] + 2*radius > rec->getY() && new_pos[1] < rec->getY() + rec->getHeight() ))
+			{
+				// Collision on a (moving) plane
+				std::cout << "Vertical collision" << std::endl;
+			}
+			// Horizontal collision :
+			else if ((new_pos[1] + radius > rec->getY() && new_pos[1] + radius < rec->getY() + rec->getHeight())
+				&& (new_pos[0] + 2*radius > rec->getX() && new_pos[0] < rec->getX() + rec->getWidth() ))
+			{
+				// Collision on a (moving) plane
+				std::cout << "Horizontal collision" << std::endl;
+			}
+			else if ((a > 0 && b < 0))
+			{
+				a = new_pos[0] + radius - rec->getX() - rec->getWidth();
+				b = new_pos[1] + radius - rec->getY();
+				c = sqrtf(a*a+b*b);  //Norm of this vector
+				// Collision on an corner (like a little sphere or a 45° plane ?)
+				if (c < radius)
+					std::cout << "Top right corner collision" << std::endl;
+			}
+			else if ((a > 0 && b > 0))
+			{
+				a = new_pos[0] + radius - rec->getX() - rec->getWidth();
+				b = new_pos[1] + radius - rec->getY() - rec->getHeight();
+				c = sqrtf(a*a+b*b);  //Norm of this vector
+				// Collision on an corner (like a little sphere or a 45° plane ?)
+				if (c < radius)
+					std::cout << "Bottom right corner collision" << std::endl;
+			}
+			else if ((a < 0 && b < 0))
+			{
+				a = new_pos[0] + radius - rec->getX();
+				b = new_pos[1] + radius - rec->getY();
+				c = sqrtf(a*a+b*b);  //Norm of this vector
+				// Collision on an corner (like a little sphere or a 45° plane ?)
+				if (c < radius)
+					std::cout << "Top left corner collision" << std::endl;
+			}
+			else if ((a < 0 && b > 0))
+			{
+				a = new_pos[0] + radius - rec->getX();
+				b = new_pos[1] + radius - rec->getY() - rec->getHeight();
+				c = sqrtf(a*a+b*b);  //Norm of this vector
+				// Collision on an corner (like a little sphere or a 45° plane ?)
+				if (c < radius)
+					std::cout << "Bottom left corner collision" << std::endl;
+			}
 		}
 	}
 
@@ -114,10 +172,11 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 			other = circs[i];
 			massO = other->getMass();
 			radO = other->getRadius();
+			// Components of the vector from the ball to the other one :
 			a = new_pos[0] + radius - other->getX() - radO;
 			b = new_pos[1] + radius - other->getY() - radO;
-			c = sqrtf(a*a+b*b);
-			d = c - radius - other->getRadius();
+			c = sqrtf(a*a+b*b); //Norm of this vector
+			d = c - radius - other->getRadius(); // Depth of penetration of the two balls (negative value = penetration)
 			// If the 2 balls are colliding
 			if (d < 0) {
 				norm[0] = a/c; norm[1] = b/c;
@@ -150,4 +209,5 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	pos[0] = new_pos[0];
 	pos[1] = new_pos[1];
 	rotZ = new_rotZ;
+	//std::cout << pos[0] << "\t" << pos[1] << std::endl;
 }

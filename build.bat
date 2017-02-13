@@ -1,5 +1,5 @@
-REM c:\GCC\bin\mingw32-make.exe -j5 clean
+REM ./clean.bat
 
 c:\GCC\bin\mingw32-make.exe -j5
 
-run.bat
+REM run.bat
