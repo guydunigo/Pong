@@ -53,21 +53,25 @@ void Window::display(void)
 		// déplacer ici les formes à gauche
 		world.setGravityX(-ACCg);
 		world.setGravityY(0);
+		//world.moveAll(-10,0);
 	     }
 	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		// déplacer ici les formes à droite
 		world.setGravityX(ACCg);
 		world.setGravityY(0);
+		//world.moveAll(10,0);
 	     }
 	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		// déplacer ici les formes en haut
 		world.setGravityX(0);
 		world.setGravityY(-ACCg);
+		//world.moveAll(0,-10);
 	     }
 	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		// déplacer ici les formes en bas
 		world.setGravityX(0);
 		world.setGravityY(ACCg);
+		//world.moveAll(0,10);
 	     }
              break;
         default:
