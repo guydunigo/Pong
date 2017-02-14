@@ -3,6 +3,8 @@
 
 #include "Shape.h"
 #include "Rectangle.h"
+#include "Triangle.h"
+#include "Segment.h"
 
 class Circle : public Shape {
 	protected :
