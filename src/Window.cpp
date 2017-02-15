@@ -18,6 +18,7 @@ void Window::display(void)
 {
   sf::Clock clock;
   sf::Event event;
+  bool menu(true);
   while (_win->isOpen())
   {
     _win->clear(sf::Color(10, 10, 10));
@@ -25,6 +26,33 @@ void Window::display(void)
     // Dessiner ici les formes géométriques
     drawAll();
     world.step(clock.restart().asSeconds());
+
+	if (menu)
+	{
+		// Draw the Play ! button :
+		// Font : Vonique 64 by Sharkshock
+		sf::Font font;
+		if (!font.loadFromFile("Vonique 64.ttf"))
+		{
+			_win->close();
+			break;
+		}
+		sf::Text play;
+		play.setFont(font);
+		play.setCharacterSize(50);
+		play.setFillColor(sf::Color(255,255,255));
+		play.setPosition((_win->getSize().x - play.getGlobalBounds().width)/2, (_win->getSize().y/2 - play.getGlobalBounds().height));
+		play.setString("Play !");
+		sf::Text quit;
+		quit.setFont(font);
+		quit.setCharacterSize(50);
+		quit.setFillColor(sf::Color(255,255,255));
+		quit.setPosition((_win->getSize().x - play.getGlobalBounds().width)/2, (_win->getSize().y/2 + play.getGlobalBounds().height));
+		quit.setString("Quit");
+
+		_win->draw(play);
+		_win->draw(quit);
+	}
 
     _win->display();
 
@@ -37,42 +65,42 @@ void Window::display(void)
         case sf::Event::Closed :
              _win->close();
              break;
-	case sf::Event::Resized :
+		case sf::Event::Resized :
 	     world.setWidth(_win->getSize().x);
 	     world.setHeight(_win->getSize().y);
 	     break;
         case sf::Event::KeyPressed:
              if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		cout<< "A" <<endl;
-	     }
-	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-		cout<< "B" <<endl;
-	     }
+				cout<< "A" <<endl;
+			}
+	     	if(sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+				cout<< "B" <<endl;
+	     	}
 
-             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		// déplacer ici les formes à gauche
-		world.setGravityX(-ACCg);
-		world.setGravityY(0);
-		//world.moveAll(-10,0);
-	     }
-	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		// déplacer ici les formes à droite
-		world.setGravityX(ACCg);
-		world.setGravityY(0);
-		//world.moveAll(10,0);
-	     }
-	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		// déplacer ici les formes en haut
-		world.setGravityX(0);
-		world.setGravityY(-ACCg);
-		//world.moveAll(0,-10);
-	     }
-	     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		// déplacer ici les formes en bas
-		world.setGravityX(0);
-		world.setGravityY(ACCg);
-		//world.moveAll(0,10);
-	     }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+				// déplacer ici les formes à gauche
+				world.setGravityX(-ACCg);
+				world.setGravityY(0);
+				//world.moveAll(-10,0);
+	     	}
+	     	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+				// déplacer ici les formes à droite
+				world.setGravityX(ACCg);
+				world.setGravityY(0);
+				//world.moveAll(10,0);
+	     	}
+	     	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				// déplacer ici les formes en haut
+				world.setGravityX(0);
+				world.setGravityY(-ACCg);
+				//world.moveAll(0,-10);
+	    	}
+	     	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				// déplacer ici les formes en bas
+				world.setGravityX(0);
+				world.setGravityY(ACCg);
+				//world.moveAll(0,10);
+	     	}
              break;
         default:
              break;
