@@ -4,22 +4,9 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include "options.h"
 #include "SFML/Graphics.hpp"
 #include "Color.h"
-
-#define PI 3.14159
-#define MASS_PER_VOLUME_CIRC 1
-#define MASS_PER_VOLUME_RECT 1
-#define MASS_PER_VOLUME_TRI 1
-
-#define FRICT_COEF	1
-#define BOUNCE_COEF	1
-// Coef balls against rectangle
-#define B_R_BOUNCE_COEF BOUNCE_COEF
-
-#define RECT_BOUNCE_COEF 1
-
-#define CELERITY_LIM	5
 
 class Rectangle;
 class Circle;

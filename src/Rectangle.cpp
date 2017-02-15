@@ -6,28 +6,6 @@ Rectangle::Rectangle(float posX,float posY, float _width, float _height, int r, 
 	updateMass();
 }
 
-float Rectangle::getWidth(void) const
-{
-	return width;
-}
-float Rectangle::getHeight(void) const
-{
-	return height;
-}
-void Rectangle::setWidth(float val)
-{
-	width=val;
-	updateMass();
-}
-void Rectangle::setHeight(float val)
-{
-	height=val;
-	updateMass();
-}
-void Rectangle::updateMass(void) {
-	mass = width * height * MASS_PER_VOLUME_RECT;
-}
-
 void Rectangle::draw(sf::RenderWindow *win) const {
   int r,g,b;
   color.getRGB(r,g,b);

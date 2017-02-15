@@ -1,18 +1,16 @@
 #include <iostream>
 #include "Window.h"
-#include "Rectangle.h"
 
 using namespace std;
 
 Window::Window(std::string n, int w, int h) : _name(n), _width(w), _height(h),
-					      _win(new sf::RenderWindow(sf::VideoMode(_width, _height), _name, sf::Style::Titlebar | sf::Style::Close)), world(w, h)
+					      _win(new sf::RenderWindow(sf::VideoMode(_width, _height), _name, sf::Style::Titlebar | sf::Style::Close)), world(new Pong(w, h))
 {
 }
 
 Window::~Window(void)
 {
-    // detruire les objects graphiques
-
+	delete world;
     delete _win;
 }
 
@@ -32,8 +30,8 @@ void Window::display(void)
 
     if (!font.loadFromFile("Vonique 64.ttf"))
     {
-	_win->close();
-	return;
+		_win->close();
+		return;
     }
     play.setFont(font);
     play.setCharacterSize(50);
@@ -56,9 +54,9 @@ void Window::display(void)
     while (_win->isOpen())
     {
 		_win->clear(sf::Color(10, 10, 10));
+		world->step(clock.restart().asSeconds());
 
 		drawAll();
-		world.step(clock.restart().asSeconds());
 
 		if (state == Menu)
 		{
@@ -68,6 +66,10 @@ void Window::display(void)
 		else if (state == Over)
 		{
 			_win->draw(gameOver);
+		}
+		else if (state == Game)
+		{
+			
 		}
 
 		_win->display();
@@ -79,11 +81,7 @@ void Window::display(void)
 			switch (event.type)
 			{
 				case sf::Event::Closed:
-				_win->close();
-				break;
-				case sf::Event::Resized:
-				world.setWidth(_win->getSize().x);
-				world.setHeight(_win->getSize().y);
+					_win->close();
 				break;
 				default:
 				break;
@@ -141,31 +139,32 @@ void Window::display(void)
 				{
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 					{
-						world.setGravityX(-ACCg);
-						world.setGravityY(0);
-						//world.moveAll(-10,0);
+						world->setGravityX(-ACCg);
+						world->setGravityY(0);
+						//world->moveAll(-10,0);
 					}
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 					{
-						world.setGravityX(ACCg);
-						world.setGravityY(0);
-						//world.moveAll(10,0);
+						world->setGravityX(ACCg);
+						world->setGravityY(0);
+						//world->moveAll(10,0);
 					}
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 					{
-						world.setGravityX(0);
-						world.setGravityY(-ACCg);
-						//world.moveAll(0,-10);
+						world->setGravityX(0);
+						world->setGravityY(-ACCg);
+						//world->moveAll(0,-10);
 					}
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 					{
-						world.setGravityX(0);
-						world.setGravityY(ACCg);
-						//world.moveAll(0,10);
+						world->setGravityX(0);
+						world->setGravityY(ACCg);
+						//world->moveAll(0,10);
 					}
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 					{
 						state = Menu;
+						resetWorld();
 					}
 				}
 			}
@@ -174,6 +173,7 @@ void Window::display(void)
 				if (event.type == sf::Event::KeyPressed)
 				{
 					state = Menu;
+					resetWorld();
 				}
 			}
 		}
@@ -182,20 +182,27 @@ void Window::display(void)
 
 void Window::moveAll(float dx, float dy)
 {
-    world.moveAll(dx, dy);
+    world->moveAll(dx, dy);
 }
 
 void Window::drawAll() const
 {
-    world.drawAll(_win);
+    world->drawAll(_win);
 }
 
 void Window::addRect(Rectangle *rect)
 {
-    world.addRect(rect);
+    world->addRect(rect);
 }
 
 void Window::addCirc(Circle *circ)
 {
-    world.addCirc(circ);
+    world->addCirc(circ);
+}
+
+void Window::resetWorld(void)
+{
+	Pong* temp = world;
+	world = new Pong(temp->getWidth(), temp->getHeight());
+	delete temp;
 }

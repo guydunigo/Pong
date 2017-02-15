@@ -1,31 +1,8 @@
 #include "Triangle.h"
 
 Triangle::Triangle(float posX, float posY, float _radius, int r, int g, int b, float celX, float celY, bool _isFixed)
-    : Shape(posX, posY, r, g, b, celX, celY, _isFixed), radius(_radius), alpha(0)
+    : Circle(posX, posY, _radius, r, g, b, celX, celY, 0, _isFixed), alpha(0)
 {
-    updateMass();
-}
-
-float Triangle::getRotZ(void) const
-{
-    return rotZ;
-}
-float Triangle::getRadius(void) const
-{
-    return radius;
-}
-void Triangle::setRadius(float val)
-{
-    radius = val;
-    updateMass();
-}
-void Triangle::setRotZ(float val)
-{
-    rotZ = val;
-}
-void Triangle::updateMass(void)
-{
-    mass = PI * radius * radius * MASS_PER_VOLUME_TRI;
 }
 
 void Triangle::draw(sf::RenderWindow *win) const

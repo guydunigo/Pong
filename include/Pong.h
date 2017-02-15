@@ -2,15 +2,10 @@
 #define PONG_H
 
 #include <vector>
+#include "options.h"
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Triangle.h"
-
-#define NB_BALLS	1
-#define NB_STARS	100
-
-#define G_COEF		50
-#define ACCg		9.81*G_COEF
 
 class Pong {
 	private:

@@ -28,14 +28,14 @@ $(TARGET) : $(OBJ)
 	@echo
 
 #-- source file header files dependencies --
-src/Appli.o : include/Window.h include/Rectangle.h include/Circle.h include/Color.h
-src/Color.o :
-src/Shape.o : include/Color.h
-src/Circle.o: include/Color.h include/Shape.h
-src/Rectangle.o: include/Color.h include/Shape.h
-src/Triangle.o: include/Color.h include/Shape.h
-src/Pong.o : include/Color.h include/Circle.h include/Rectangle.h include/Shape.h
-src/Window.o: include/Window.h include/Color.h include/Circle.h include/Rectangle.h
+src/Appli.o : include/Window.h include/Rectangle.h include/Circle.h include/Triangle.h include/Color.h include/options.h
+src/Color.o : include/options.h
+src/Shape.o : include/Color.h include/options.h
+src/Circle.o: include/Color.h include/Shape.h include/options.h
+src/Rectangle.o: include/Color.h include/Shape.h include/options.h
+src/Triangle.o: include/Color.h include/Shape.h include/options.h
+src/Pong.o : include/Color.h include/Circle.h include/Rectangle.h include/Triangle.h include/Shape.h include/options.h
+src/Window.o: include/Window.h include/Color.h include/Circle.h include/Rectangle.h include/Triangle.h include/options.h
 
 
 #-- compiler command for every source file --

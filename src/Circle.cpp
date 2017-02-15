@@ -6,28 +6,6 @@ Circle::Circle(float posX, float posY, float _radius, int r, int g, int b, float
     updateMass();
 }
 
-float Circle::getRotZ(void) const
-{
-    return rotZ;
-}
-float Circle::getRadius(void) const
-{
-    return radius;
-}
-void Circle::setRadius(float val)
-{
-    radius = val;
-    updateMass();
-}
-void Circle::setRotZ(float val)
-{
-    rotZ = val;
-}
-void Circle::updateMass(void)
-{
-    mass = PI * radius * radius * MASS_PER_VOLUME_CIRC;
-}
-
 void Circle::draw(sf::RenderWindow *win) const
 {
     int r, g, b;
