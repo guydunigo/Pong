@@ -73,6 +73,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
     // Bouncing against the walls (just in case the rectangle walls don't work)
     if (new_pos[0] < 0 || new_pos[0] + radius * 2 > width || new_pos[1] < 0 || new_pos[1] + radius * 2 > height)
     {
+		/*
 		if (new_pos[0] < 0)
 		{ // Left
 			norm[0] = 1;
@@ -114,6 +115,35 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 		for (i = 0; i < 2; i++)
 		{
 			new_cel[i] = a * norm[i] - rotZ * radius * tang[i];
+		}
+		*/
+		if (new_pos[0] < 0)
+		{ // Left to bottom
+			new_pos[0] = new_pos[1]*width/(float)height;
+			new_pos[1] = height - radius * 2;
+			new_cel[1] = new_cel[0]/2;
+			new_cel[0] = 0;
+		}
+		else if (new_pos[0] + radius * 2 > width)
+		{ // Right to top
+			new_pos[0] = new_pos[1]*width/(float)height;
+			new_pos[1] = 0;
+			new_cel[1] = new_cel[0]/2;
+			new_cel[0] = 0;
+		}
+		if (new_pos[1] < 0)
+		{ // Top to left
+			new_pos[1] = new_pos[0]*height/(float)width;
+			new_pos[0] = 0;
+			new_cel[0] = - new_cel[1]/2;
+			new_cel[1] = 0;
+		}
+		else if (new_pos[1] + radius * 2 > height)
+		{ // Bottom to right
+			new_pos[1] = new_pos[0]*height/(float)width;
+			new_pos[0] = width - radius*2;
+			new_cel[0] = - new_cel[1]/2;
+			new_cel[1] = 0;
 		}
     }
 
