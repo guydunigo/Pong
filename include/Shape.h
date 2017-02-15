@@ -27,20 +27,56 @@ class Shape {
 			tang[0] = norm[1]; tang[1] = -norm[0];
 		}
 
-		float getX(void) const;
-		float getY(void) const;
-		float getCelX(void) const;
-		float getCelY(void) const;
-		float getMass(void) const;
-		Color& getColor(void);
-		void setX(float);
-		void setY(float);
-		void setCelX(float);
-		void setCelY(float);
-		void setColor(const Color&);
+		inline float getX(void) const
+		{
+			return pos[0];
+		}
+		inline float getY(void) const
+		{
+			return pos[1];
+		}
+		inline float getCelX(void) const
+		{
+			return cel[0];
+		}
+		inline float getCelY(void) const
+		{
+			return cel[1];
+		}
+		inline float getMass(void) const
+		{
+			return mass;
+		}
+		inline Color& getColor(void);
+		{
+			return color;
+		}
+		inline void setX(float)
+		{
+			pos[0]=val;
+		}
+		inline void setY(float)
+		{
+			pos[1]=val;
+		}
+		inline void setCelX(float)
+		{
+			cel[0]=val;
+		}
+		inline void setCelY(float)
+		{
+			cel[1]=val;
+		}
+		inline void setColor(const Color&)
+		{
+			color = col;
+		}
 		virtual void updateMass(void) = 0;
 
-		void move(float, float);
+		inline void move(float, float)
+		{
+			pos[0]+=dx;pos[1]+=dy;
+		}
 		virtual void step(float, float, float, std::vector<Rectangle*> &, std::vector<Circle*> &, std::vector<Triangle*> &, float, float) = 0;
 
 		virtual void draw(sf::RenderWindow *win) const = 0;
