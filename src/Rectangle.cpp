@@ -1,7 +1,7 @@
 #include "Rectangle.h"
 
 Rectangle::Rectangle(float posX,float posY, float _width, float _height, int r, int g, int b, float celX, float celY, bool _isFixed):
-	Shape(posX,posY,r,g,b,celX,celY, _isFixed),width(_width),height(_height)
+	Shape(posX,posY,r,g,b,celX,celY, _isFixed),width(_width),height(_height), isCollided(false)
 {
 	updateMass();
 }
@@ -10,7 +10,8 @@ void Rectangle::draw(sf::RenderWindow *win) const {
   int r,g,b;
   color.getRGB(r,g,b);
   sf::RectangleShape shape(sf::Vector2f(width, height));
-  shape.setFillColor(sf::Color(r, g, b));
+  if (isCollided) shape.setFillColor(sf::Color(r - 100, g - 100, b - 100));
+  else shape.setFillColor(sf::Color(r, g, b));
   shape.setPosition(pos[0],pos[1]);
   win->draw(shape);
 }

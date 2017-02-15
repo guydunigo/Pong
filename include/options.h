@@ -26,6 +26,7 @@
 // Points coefs :
     #define BAR_BONUS       10
     #define WALLS_MALUS     -10
+    #define TRIG_BONUS      10
 
 // Triangles powerups and traps :
     #define TRIG_CEL_MAL_COLOR  210,100,0

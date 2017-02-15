@@ -9,6 +9,7 @@ class Triangle;
 class Rectangle : public Shape {
   protected :
 	  float width,height;
+	  bool isCollided;
   public :
 	  Rectangle(float posX = 0,float posY = 0, float _w = 0, float _h = 0, int r = 0, int g = 0, int b = 0, float celX = 0, float celY = 0, bool _isFixed = true);
 	  ~Rectangle(void){}
@@ -19,6 +20,9 @@ class Rectangle : public Shape {
 	  inline float getHeight(void) const {
 		  return height;
 	  }
+	  inline bool getIsCollided(void) const {
+		  return isCollided;
+	  }
 	  inline void setWidth(float val) {
 		  width = val;
 		  updateMass();
@@ -26,6 +30,9 @@ class Rectangle : public Shape {
 	  inline void setHeight(float val) {
 		  height=val;
 		  updateMass();
+	  }
+	  inline void setIsCollided(bool val) {
+		  isCollided=val;
 	  }
 
 	  inline void updateMass(void) {

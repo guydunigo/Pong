@@ -49,9 +49,10 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
     if (alpha > 360) alpha -= 360;
     if (alpha < -360) alpha += 360;
 
-    // Bouncing against the walls (just in case the rectangle walls don't work)
+    // Bouncing against the walls (malus)
     if (new_pos[0] < 0 || new_pos[0] + radius * 2 > width || new_pos[1] < 0 || new_pos[1] + radius * 2 > height)
     {
+		points += WALLS_MALUS;
 		if (new_pos[0] < 0)
 		{ // Left
 			norm[0] = 1;
@@ -206,6 +207,14 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 
 			if (collision)
 			{
+				if (!rec->getIsCollided()) {
+					for (i = 0 ; i < rects.size() ; i++) {
+						rects[i]->setIsCollided(false);
+					}
+					rec->setIsCollided(true);
+					points += BAR_BONUS;
+				}
+
 				other_cel[0] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[0];
 				other_cel[1] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[1];
 
@@ -227,7 +236,18 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	for (i = 0; i < trigs.size(); i++)
 	{
 		trig = trigs[i];
-		trig->effects(this);
+		if (!trig->getIsOff())
+		{
+			// Components of the vector from the ball to the Triangle :
+			a = new_pos[0] + radius - trig->getX() - trig->getRadius();
+			b = new_pos[1] + radius - trig->getY() - trig->getRadius();
+			c = sqrtf(a * a + b * b);		 //Norm of this vector
+			if (c < trig->getRadius() + radius)
+			{
+				trig->effects(this);
+				points += TRIG_BONUS; // Always gain a bonus with triangles (even for bad ones)
+			}
+		}
 	}
 
     // Bouncing against other balls
