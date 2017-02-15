@@ -3,6 +3,13 @@
 
 Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_width), height(_height), gravityX(_gravityX), gravityY(_gravityY) {
 
+	for (int i = 0 ; i < NB_STARS ; i++)
+	{
+		stars[i] = new sf::RectangleShape(sf::Vector2f(2, 2));
+  		stars[i]->setFillColor(sf::Color(255, 255, 255));
+		stars[i]->setPosition(std::rand()%width, std::rand()%height);
+	}
+
 	addRect(new Rectangle(10,std::rand()%(int)(.66*height),10,.33*height,255,0,0,0,(std::rand()%10+10)*30, false));
 	addRect(new Rectangle(width - 20,std::rand()%(int)(.66*height),10,.33*height,0,255,0,0,(std::rand()%10+10)*30, false));
 	addRect(new Rectangle(std::rand()%(int)(.66*width),10,.33*width,10,0,0,255,(std::rand()%10+10)*30,0, false));
@@ -24,6 +31,8 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 }
 
 Pong::~Pong(void) {
+	for (unsigned int i = 0 ; i < NB_STARS ; i++)
+		delete stars[i];
 	for (unsigned int i = 0 ; i < shapes.size() ; i++)
 		delete shapes[i];
 }
@@ -59,6 +68,8 @@ void Pong::moveAll(float dx, float dy) {
 }
 
 void Pong::drawAll(sf::RenderWindow *win) const {
+	for (unsigned int i = 0 ; i < NB_STARS ; i++)
+		win->draw(*(stars[i]));
 	for (unsigned int i = 0 ; i < shapes.size() ; i++)
 		shapes[i]->draw(win);
 }

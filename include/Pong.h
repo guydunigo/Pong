@@ -7,6 +7,7 @@
 #include "Triangle.h"
 
 #define NB_BALLS	1
+#define NB_STARS	100
 
 #define G_COEF		50
 #define ACCg		9.81*G_COEF
@@ -19,6 +20,7 @@ class Pong {
 		std::vector<Rectangle*> rects;
 		std::vector<Circle*> circs;
 		std::vector<Triangle*> trigs;
+		sf::RectangleShape* stars[NB_STARS];
 
 	public:
 		Pong(int _width = 0, int _height = 0, float _gravityX = 0, float _gravityY = ACCg);
