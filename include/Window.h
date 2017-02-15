@@ -8,6 +8,8 @@
 
 #define DELAY_TIME 0.01
 
+enum Game_state { Menu, Game, Over };
+
 class Window {
   private :
     std::string _name;
