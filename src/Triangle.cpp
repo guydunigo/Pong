@@ -1,7 +1,7 @@
 #include "Triangle.h"
 
-Triangle::Triangle(float posX, float posY, float _radius, int r, int g, int b, float celX, float celY, float _rotZ)
-    : Shape(posX, posY, r, g, b, celX, celY), radius(_radius), rotZ(_rotZ), alpha(0)
+Triangle::Triangle(float posX, float posY, float _radius, int r, int g, int b, float celX, float celY, bool _isFixed)
+    : Shape(posX, posY, r, g, b, celX, celY, _isFixed), radius(_radius), alpha(0)
 {
     updateMass();
 }
@@ -39,7 +39,7 @@ void Triangle::draw(sf::RenderWindow *win) const
     win->draw(shape);
 }
 
-void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectangle*> &rects, std::vector<Circle*> &circs, float width, float height)
+void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectangle*> &rects, std::vector<Circle*> &circs, std::vector<Triangle*> &trigs, float width, float height)
 {
 	(void)dt;
 	(void)gravityX;
@@ -48,4 +48,8 @@ void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectan
 	(void)circs;
 	(void)width;
 	(void)height;
+    if (!isFixed)
+    {
+        
+    }
 }

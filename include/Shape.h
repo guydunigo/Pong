@@ -13,19 +13,23 @@
 #define MASS_PER_VOLUME_TRI 1
 
 #define FRICT_COEF	0.9
-#define BOUNCE_COEF	0.9
+#define BOUNCE_COEF	1
+
+#define RECT_BOUNCE_COEF 1
 
 #define CELERITY_LIM	5
 
 class Rectangle;
 class Circle;
+class Triangle;
 
 class Shape {
 	protected:
+		bool isFixed;
 		float pos[2], cel[2], mass;
 		Color color;
 	public:
-		Shape(float posX, float posY, int r, int g, int b, float celX, float celY);
+		Shape(float posX, float posY, int r, int g, int b, float celX, float celY, bool _isFixed = true);
 		virtual ~Shape(void) {};
 
 		inline void getTang(const float norm[2], float tang[2]) const
@@ -48,7 +52,7 @@ class Shape {
 		virtual void updateMass(void) = 0;
 
 		void move(float, float);
-		virtual void step(float, float, float, std::vector<Rectangle*> &, std::vector<Circle*> &, float, float) = 0;
+		virtual void step(float, float, float, std::vector<Rectangle*> &, std::vector<Circle*> &, std::vector<Triangle*> &, float, float) = 0;
 
 		virtual void draw(sf::RenderWindow *win) const = 0;
 };

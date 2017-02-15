@@ -1,6 +1,6 @@
 #include "Shape.h"
 
-Shape::Shape(float posX, float posY, int r, int g, int b, float celX, float celY): color(r,g,b)
+Shape::Shape(float posX, float posY, int r, int g, int b, float celX, float celY, bool _isFixed): isFixed(_isFixed), color(r,g,b)
 {
 	pos[0] = posX;
 	pos[1] = posY;
