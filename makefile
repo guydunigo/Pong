@@ -14,7 +14,7 @@ endif
 
 #-- compiler/linker settings --
 CXX=g++
-CXXFLAGS=-W -Wall -Wno-long-long -pedantic -g #-std=c++11
+CXXFLAGS=-W -Wall -Wno-long-long -pedantic #-g #-std=c++11
 IFLAGS=-I$(SFMLDIR)/include -I./include
 LDFLAGS=-L$(SFMLDIR)/lib -Wl,-rpath,${SFMLDIR}/lib -lsfml-graphics -lsfml-window -lsfml-system
 
