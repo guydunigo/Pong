@@ -1,15 +1,15 @@
-#ifndef SEGMENT_H
-#define SEGMENT_H
+#ifndef COLLISION_LINE_H
+#define COLLISION_LINE_H
 
-class Segment {
+// To generalize collisions against a moving line no matter the angle
+class Collision_line {
     private:
         float pos[2];
         float cel[2];
         float norm[2];
         float tang[2];
-        float size;
     public:
-        Segment(const float _pos[2], const float _cel[2], const float _norm[2], float _size): size(_size)
+        Collision_line(const float _pos[2], const float _cel[2], const float _norm[2])
         {
             for (int i = 0 ; i < 2 ; i++)
             {
@@ -56,9 +56,6 @@ class Segment {
         }
         inline float getTangY(void) const {
             return tang[1];
-        }
-        inline float getSize(void) const {
-            return size;
         }
 };
 
