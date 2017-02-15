@@ -9,6 +9,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Triangle.h"
+#include "Triangle_Points_Bonus.h"
 
 enum Game_state { Menu, Game, Over };
 

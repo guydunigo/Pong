@@ -1,4 +1,5 @@
 #include "Circle.h"
+#include "Triangle.h"
 
 Circle::Circle(float posX, float posY, float _alpha, float _radius, int r, int g, int b, float celX, float celY, float _rotZ, bool _isFixed)
     : Shape(posX, posY, r, g, b, celX, celY, _isFixed), radius(_radius), rotZ(_rotZ), alpha(_alpha)
@@ -226,7 +227,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	for (i = 0; i < trigs.size(); i++)
 	{
 		trig = trigs[i];
-		//trig->effect(this);
+		trig->effects(this);
 	}
 
     // Bouncing against other balls

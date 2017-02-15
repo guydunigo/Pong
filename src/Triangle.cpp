@@ -1,9 +1,9 @@
 #include "Triangle.h"
 
 Triangle::Triangle(float posX, float posY, float _alpha, float _radius, int r, int g, int b, float celX, float celY, bool _isFixed)
-    : Circle(posX, posY, alpha, _radius, r, g, b, celX, celY, 0, _isFixed)
+    : Circle(posX, posY, alpha, _radius, r, g, b, celX, celY, 0, _isFixed), isOff(false)
 {
-    (void)alpha;
+    (void)_alpha;
 }
 
 void Triangle::draw(sf::RenderWindow *win) const
@@ -29,6 +29,11 @@ void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectan
 	(void)height;
     if (!isFixed)
     {
-
+        pos[0] = cel[0]*dt;
+        pos[1] = cel[1]*dt;
+        if (pos[0] < 2*radius || pos[0] > width || pos[1] < 2*radius || pos[1] > height)
+        {
+            isOff = true;
+        }
     }
 }

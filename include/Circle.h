@@ -32,6 +32,9 @@ class Circle : public Shape {
 			radius = val;
 			updateMass();
 		}
+		inline void setPoints(int val) {
+			points = val;
+		}
 		inline void resetPoints(void) {
 			points = 0;
 		}

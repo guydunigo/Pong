@@ -47,33 +47,33 @@ class Shape {
 		{
 			return mass;
 		}
-		inline Color& getColor(void);
+		inline Color& getColor(void)
 		{
 			return color;
 		}
-		inline void setX(float)
+		inline void setX(float val)
 		{
 			pos[0]=val;
 		}
-		inline void setY(float)
+		inline void setY(float val)
 		{
 			pos[1]=val;
 		}
-		inline void setCelX(float)
+		inline void setCelX(float val)
 		{
 			cel[0]=val;
 		}
-		inline void setCelY(float)
+		inline void setCelY(float val)
 		{
 			cel[1]=val;
 		}
-		inline void setColor(const Color&)
+		inline void setColor(const Color& col)
 		{
 			color = col;
 		}
 		virtual void updateMass(void) = 0;
 
-		inline void move(float, float)
+		inline void move(float dx, float dy)
 		{
 			pos[0]+=dx;pos[1]+=dy;
 		}

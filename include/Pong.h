@@ -6,6 +6,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Triangle.h"
+#include "Triangle_Points_Bonus.h"
 
 class Pong {
 	private:
