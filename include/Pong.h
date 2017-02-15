@@ -39,6 +39,9 @@ class Pong {
 		void drawAll(sf::RenderWindow *win) const;
 
 		void step(float dt);
+
+		int getPoints(void);
+		void resetPoints(void);
 };
 
 #endif

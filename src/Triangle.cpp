@@ -1,8 +1,9 @@
 #include "Triangle.h"
 
-Triangle::Triangle(float posX, float posY, float _radius, int r, int g, int b, float celX, float celY, bool _isFixed)
-    : Circle(posX, posY, _radius, r, g, b, celX, celY, 0, _isFixed), alpha(0)
+Triangle::Triangle(float posX, float posY, float _alpha, float _radius, int r, int g, int b, float celX, float celY, bool _isFixed)
+    : Circle(posX, posY, alpha, _radius, r, g, b, celX, celY, 0, _isFixed)
 {
+    (void)alpha;
 }
 
 void Triangle::draw(sf::RenderWindow *win) const

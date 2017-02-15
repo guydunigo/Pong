@@ -22,6 +22,7 @@ void Window::display(void)
     sf::Text play;
     sf::Text quit;
     sf::Text gameOver;
+    sf::Text points;
     Game_state state(Menu);
     int selected(0);
 
@@ -51,6 +52,12 @@ void Window::display(void)
     gameOver.setString("Game Over !");
     gameOver.setPosition((_win->getSize().x - play.getGlobalBounds().width) / 2, (_win->getSize().y / 2 + play.getGlobalBounds().height / 2));
 
+    points.setFont(font);
+    points.setCharacterSize(30);
+    points.setFillColor(sf::Color(255, 255, 255));
+    points.setString("Points : 0");
+    points.setPosition(5,5);
+
     while (_win->isOpen())
     {
 		_win->clear(sf::Color(10, 10, 10));
@@ -69,7 +76,8 @@ void Window::display(void)
 		}
 		else if (state == Game)
 		{
-			
+			points.setString("Points : " + std::to_string(world->getPoints()));
+			_win->draw(points);
 		}
 
 		_win->display();
@@ -119,6 +127,7 @@ void Window::display(void)
 						if (selected == 0)
 						{
 							state = Game;
+							world->resetPoints();
 						}
 						else
 						{

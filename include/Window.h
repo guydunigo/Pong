@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <string>
 #include "SFML/Graphics.hpp"
 #include "options.h"
 #include "Pong.h"

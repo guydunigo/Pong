@@ -21,12 +21,12 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 	//addRect(new Rectangle(width-10,0,100,height,255,0,0, rand()%100, rand()%100));
 	//addRect(new Rectangle(0,height-10,width,100,255,0,0, rand()%100, rand()%100));
 
-	addTrig(new Triangle(30,500,100,255,255,255,0,0, true));
+	addTrig(new Triangle(30,500,0,100,255,255,255,0,0, true));
 
-	addCirc(new Circle(std::rand()%500,0,20+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100+100,std::rand()%100, std::rand()%20 - 10));
+	addCirc(new Circle(std::rand()%500,0,0,20+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100+100,std::rand()%100, std::rand()%20 - 10));
 
 	for (int i = 0 ; i < NB_BALLS-1 ; i++)
-		addCirc(new Circle(std::rand()%500,0,10+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100,std::rand()%100, std::rand()%20 - 10));
+		addCirc(new Circle(std::rand()%500,0,0,10+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100,std::rand()%100, std::rand()%20 - 10));
 
 }
 
@@ -92,4 +92,18 @@ void Pong::addTrig(Triangle* trig) {
 void Pong::step(float dt) {
 	for (unsigned int i = 0 ; i < shapes.size() ; i++)
 		shapes[i]->step(dt, gravityX, gravityY, rects, circs, trigs, width, height);
+}
+
+void Pong::resetPoints(void) {
+	for (unsigned int i = 0 ; i < circs.size() ; i++)
+		circs[i]->resetPoints();
+}
+
+int Pong::getPoints(void) {
+	int points(0);
+	for (unsigned int i = 0 ; i < circs.size() ; i++)
+	{
+		points += circs[i]->getPoints();
+	}
+	return points;
 }
