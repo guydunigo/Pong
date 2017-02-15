@@ -5,6 +5,8 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 
 	addRect(new Rectangle(10,std::rand()%(int)(.66*height),10,.33*height,255,0,0,0,(std::rand()%10+10)*30, false));
 	addRect(new Rectangle(width - 20,std::rand()%(int)(.66*height),10,.33*height,0,255,0,0,(std::rand()%10+10)*30, false));
+	addRect(new Rectangle(std::rand()%(int)(.66*width),10,.33*width,10,0,0,255,(std::rand()%10+10)*30,0, false));
+	addRect(new Rectangle(std::rand()%(int)(.66*width),height - 20,.33*width,10,255,255,0,(std::rand()%10+10)*30,0, false));
 
 	// Walls (Left,Top,Right,Bottom)
 	//addRect(new Rectangle(-100,0,110,height,255,0,0, rand()%100, rand()%100));
