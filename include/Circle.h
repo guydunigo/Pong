@@ -4,7 +4,6 @@
 #include "Shape.h"
 #include "Rectangle.h"
 #include "Triangle.h"
-#include "Collision_Line.h"
 
 class Circle : public Shape {
 	protected :

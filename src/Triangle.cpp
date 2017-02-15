@@ -46,10 +46,11 @@ void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectan
 	(void)gravityY;
 	(void)rects;
 	(void)circs;
+	(void)trigs;
 	(void)width;
 	(void)height;
     if (!isFixed)
     {
-        
+
     }
 }

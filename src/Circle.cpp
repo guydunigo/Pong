@@ -51,11 +51,11 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 	if (!isFixed)
 	{
     float massO(0), radO(0), gravity[2], norm[2], tang[2], new_pos[2], new_cel[2], other_cel[2], new_rotZ(rotZ), a(0), b(0), c(0), d(0);
-    int i(0);
+    unsigned int i(0);
     Circle *other;
     Rectangle *rec;
+	Triangle *trig;
     bool collision = false;
-	Collision_line* cl = NULL;
 
     gravity[0] = gravityX;
     gravity[1] = gravityY;
@@ -118,133 +118,141 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
     }
 
     // Bouncing against Rectangles
-    for (unsigned int i = 0; i < rects.size(); i++)
+    for (i = 0; i < rects.size(); i++)
     {
-	rec = rects[i];
-	collision = false;
-	norm[0] = 0; norm[1] = 0;
-	// Detect if in the rect
-	// Components of the vector from the ball to the rectangle :
-	a = new_pos[0] + radius - rec->getX() - rec->getWidth() / 2;
-	b = new_pos[1] + radius - rec->getY() - rec->getHeight() / 2;
-	c = sqrtf(a * a + b * b); // Norm of this vector
-
-	// Vertical collisions :
-	if (new_pos[0] + radius > rec->getX() && new_pos[0] + radius < rec->getX() + rec->getWidth())
-	{
-	    // Collision on a (moving) plane
-	    if (new_pos[1] + 2 * radius > rec->getY() && new_pos[1] < rec->getY())
-	    {
-			collision = true;
-			// Top collision
-			norm[0] = 0;
-			norm[1] = -1; // tang = [-1,0]
-			//new_pos[1] = rec->getY() - 2 * radius;
-	    }
-	    else if (new_pos[1] + 2 * radius > rec->getY() + rec->getHeight() && new_pos[1] < rec->getY() + rec->getHeight())
-	    {
-			collision = true;
-			// Bottom collision
-			norm[0] = 0;
-			norm[1] = 1; // tang = [1, 0]
-			//new_pos[1] = rec->getY() + rec->getHeight();
-	    }
-	}
-	// Horizontal collisions :
-	else if (new_pos[1] + radius > rec->getY() && new_pos[1] + radius < rec->getY() + rec->getHeight())
-	{
-	    // Collision on a (moving) plane
-	    if (new_pos[0] + 2 * radius > rec->getX() && new_pos[0] < rec->getX())
-	    {
-			collision = true;
-			// Left collision
-			norm[0] = -1;
-			norm[1] = 0; // tang = [0, 1]
-			//new_pos[0] = rec->getX() - radius * 2;
-	    }
-	    else if (new_pos[0] + 2 * radius > rec->getX() + rec->getWidth() && new_pos[0] < rec->getX() + rec->getWidth())
-	    {
-			collision = true;
-			// Right collision
-			norm[0] = 1;
-			norm[1] = 0; // tang = [0,-1]
-			//new_pos[0] = rec->getX() + rec->getWidth();
-	    }
-	}
-	else
-	{
-	    if ((a > 0 && b < 0))
-	    {
-			a = new_pos[0] + radius - rec->getX() - rec->getWidth();
-			b = new_pos[1] + radius - rec->getY();
-			c = sqrtf(a * a + b * b); //Norm of this vector
-			// Collision on an corner (like a little sphere or a 45° plane ?)
-			if (c < radius)
-			{
-				collision = true;
-			}
-	    }
-	    else if ((a > 0 && b > 0))
-	    {
-			a = new_pos[0] + radius - rec->getX() - rec->getWidth();
-			b = new_pos[1] + radius - rec->getY() - rec->getHeight();
-			c = sqrtf(a * a + b * b); //Norm of this vector
-			// Collision on an corner (like a little sphere or a 45° plane ?)
-			if (c < radius)
-			{
-				collision = true;
-			}
-	    }
-	    else if ((a < 0 && b < 0))
-	    {
-			a = new_pos[0] + radius - rec->getX();
-			b = new_pos[1] + radius - rec->getY();
-			c = sqrtf(a * a + b * b); //Norm of this vector
-			// Collision on an corner (like a little sphere or a 45° plane ?)
-			if (c < radius)
-			{
-				collision = true;
-			}
-	    }
-	    else if ((a < 0 && b > 0))
-	    {
-			a = new_pos[0] + radius - rec->getX();
-			b = new_pos[1] + radius - rec->getY() - rec->getHeight();
-			c = sqrtf(a * a + b * b); //Norm of this vector
-			// Collision on an corner (like a little sphere or a 45° plane ?)
-			if (c < radius)
-			{
-				collision = true;
-			}
-	    }
-		if (collision)
+		rec = rects[i];
+		collision = false;
+		norm[0] = 0; norm[1] = 0;
+		// Detect if in the rect
+		// Components of the vector from the ball to the rectangle :
+		a = new_pos[0] + radius - rec->getX() - rec->getWidth() / 2;
+		b = new_pos[1] + radius - rec->getY() - rec->getHeight() / 2;
+		c = sqrtf(a * a + b * b); // Norm of this vector
+		if (c < radius + sqrtf(width*width+height*height)/2)
 		{
-			norm[0] = a / c;
-			norm[1] = b / c;
+			// Vertical collisions :
+			if (new_pos[0] + radius > rec->getX() && new_pos[0] + radius < rec->getX() + rec->getWidth())
+			{
+				// Collision on a (moving) plane
+				if (new_pos[1] + 2 * radius > rec->getY() && new_pos[1] < rec->getY())
+				{
+					collision = true;
+					// Top collision
+					norm[0] = 0;
+					norm[1] = -1; // tang = [-1,0]
+					//new_pos[1] = rec->getY() - 2 * radius;
+				}
+				else if (new_pos[1] + 2 * radius > rec->getY() + rec->getHeight() && new_pos[1] < rec->getY() + rec->getHeight())
+				{
+					collision = true;
+					// Bottom collision
+					norm[0] = 0;
+					norm[1] = 1; // tang = [1, 0]
+					//new_pos[1] = rec->getY() + rec->getHeight();
+				}
+			}
+			// Horizontal collisions :
+			else if (new_pos[1] + radius > rec->getY() && new_pos[1] + radius < rec->getY() + rec->getHeight())
+			{
+				// Collision on a (moving) plane
+				if (new_pos[0] + 2 * radius > rec->getX() && new_pos[0] < rec->getX())
+				{
+					collision = true;
+					// Left collision
+					norm[0] = -1;
+					norm[1] = 0; // tang = [0, 1]
+					//new_pos[0] = rec->getX() - radius * 2;
+				}
+				else if (new_pos[0] + 2 * radius > rec->getX() + rec->getWidth() && new_pos[0] < rec->getX() + rec->getWidth())
+				{
+					collision = true;
+					// Right collision
+					norm[0] = 1;
+					norm[1] = 0; // tang = [0,-1]
+					//new_pos[0] = rec->getX() + rec->getWidth();
+				}
+			}
+			else
+			{
+				if ((a > 0 && b < 0))
+				{
+					a = new_pos[0] + radius - rec->getX() - rec->getWidth();
+					b = new_pos[1] + radius - rec->getY();
+					c = sqrtf(a * a + b * b); //Norm of this vector
+					// Collision on an corner (like a little sphere or a 45° plane ?)
+					if (c < radius)
+					{
+						collision = true;
+					}
+				}
+				else if ((a > 0 && b > 0))
+				{
+					a = new_pos[0] + radius - rec->getX() - rec->getWidth();
+					b = new_pos[1] + radius - rec->getY() - rec->getHeight();
+					c = sqrtf(a * a + b * b); //Norm of this vector
+					// Collision on an corner (like a little sphere or a 45° plane ?)
+					if (c < radius)
+					{
+						collision = true;
+					}
+				}
+				else if ((a < 0 && b < 0))
+				{
+					a = new_pos[0] + radius - rec->getX();
+					b = new_pos[1] + radius - rec->getY();
+					c = sqrtf(a * a + b * b); //Norm of this vector
+					// Collision on an corner (like a little sphere or a 45° plane ?)
+					if (c < radius)
+					{
+						collision = true;
+					}
+				}
+				else if ((a < 0 && b > 0))
+				{
+					a = new_pos[0] + radius - rec->getX();
+					b = new_pos[1] + radius - rec->getY() - rec->getHeight();
+					c = sqrtf(a * a + b * b); //Norm of this vector
+					// Collision on an corner (like a little sphere or a 45° plane ?)
+					if (c < radius)
+					{
+						collision = true;
+					}
+				}
+				if (collision)
+				{
+					norm[0] = a / c;
+					norm[1] = b / c;
+				}
+			}
+
+			if (collision)
+			{
+				other_cel[0] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[0];
+				other_cel[1] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[1];
+
+				new_pos[0] += norm[0];
+				new_pos[1] += norm[1];
+
+				getTang(norm, tang);
+				new_rotZ = (2 * radius * new_rotZ - 5 * (new_cel[0] * tang[0] + new_cel[1] * tang[1] - other_cel[0] * tang[0] - other_cel[1]*tang[1])) / (7 * radius);
+				a = (-1) * B_R_BOUNCE_COEF * (new_cel[0] * norm[0] + new_cel[1] * norm[1]);
+				b = (1 + B_R_BOUNCE_COEF * (other_cel[0] * norm[0] + other_cel[1] * norm[1]));
+				for (i = 0; i < 2; i++)
+				{
+					new_cel[i] = (a+b) * norm[i] - rotZ * radius * tang[i];
+				}
+			}
 		}
-	}
-
-	if (collision)
-	{
-		other_cel[0] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[0];
-		other_cel[1] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[1];
-
-		new_pos[0] += norm[0];
-		new_pos[1] += norm[1];
-
-	    getTang(norm, tang);
-	    new_rotZ = (2 * radius * new_rotZ - 5 * (new_cel[0] * tang[0] + new_cel[1] * tang[1] - other_cel[0] * tang[0] - other_cel[1]*tang[1])) / (7 * radius);
-	    a = (-1) * B_R_BOUNCE_COEF * (new_cel[0] * norm[0] + new_cel[1] * norm[1]);
-		b = (1 + B_R_BOUNCE_COEF * (other_cel[0] * norm[0] + other_cel[1] * norm[1]));
-	    for (i = 0; i < 2; i++)
-	    {
-			new_cel[i] = (a+b) * norm[i] - rotZ * radius * tang[i];
-	    }
-	}
     }
 
+	for (i = 0; i < trigs.size(); i++)
+	{
+		trig = trigs[i];
+		//trig->effect(this);
+	}
+
     // Bouncing against other balls
-    for (unsigned int i = 0; i < circs.size(); i++)
+    for (i = 0; i < circs.size(); i++)
     {
 		if (circs[i] != this)
 		{

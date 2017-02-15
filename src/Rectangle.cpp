@@ -39,14 +39,15 @@ void Rectangle::draw(sf::RenderWindow *win) const {
 
 void Rectangle::step(float dt, float gravityX, float gravityY, std::vector<Rectangle*> &rects, std::vector<Circle*> &circs, std::vector<Triangle*> &trigs, float width, float height)
 {
-	(void)rects;(void)circs;
+	(void)rects;(void)circs;(void)trigs;
+	(void)gravityX;(void)gravityY;
 	if (!isFixed)
 	{
 	int i;
 	float norm[2], tang[2], a;
 	float new_pos[2] = {pos[0], pos[1]};
 	float new_cel[2] = {cel[0], cel[1]};
-	float gravity[2] = { gravityX, gravityY };
+	
 	for (int i = 0 ; i < 2 ; i++) {
 		//new_cel[i] += gravity[i]*dt;
 		new_pos[i] += new_cel[i]*dt;

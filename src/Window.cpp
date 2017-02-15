@@ -20,7 +20,7 @@ void Window::display(void)
   sf::Event event;
   while (_win->isOpen())
   {
-    _win->clear(sf::Color(100, 100, 100));
+    _win->clear(sf::Color(10, 10, 10));
     
     // Dessiner ici les formes géométriques
     drawAll();
