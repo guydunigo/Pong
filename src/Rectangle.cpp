@@ -48,7 +48,7 @@ void Rectangle::step(float dt, float gravityX, float gravityY, std::vector<Recta
 	float new_cel[2] = {cel[0], cel[1]};
 	float gravity[2] = { gravityX, gravityY };
 	for (int i = 0 ; i < 2 ; i++) {
-		new_cel[i] += gravity[i]*dt;
+		//new_cel[i] += gravity[i]*dt;
 		new_pos[i] += new_cel[i]*dt;
 	}
 	if (new_pos[0] < 0 || new_pos[0] + this->width > width || new_pos[1] < 0 || new_pos[1] + this->height > height)

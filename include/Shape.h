@@ -12,8 +12,10 @@
 #define MASS_PER_VOLUME_RECT 1
 #define MASS_PER_VOLUME_TRI 1
 
-#define FRICT_COEF	0.9
+#define FRICT_COEF	1
 #define BOUNCE_COEF	1
+// Coef balls against rectangle
+#define B_R_BOUNCE_COEF BOUNCE_COEF
 
 #define RECT_BOUNCE_COEF 1
 

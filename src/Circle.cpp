@@ -139,8 +139,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 			// Top collision
 			norm[0] = 0;
 			norm[1] = -1; // tang = [-1,0]
-			new_pos[1] = rec->getY() - 2 * radius;
-			//new_cel[0] = (2*radius*new_rotZ + 5*new_cel[0])/7;
+			//new_pos[1] = rec->getY() - 2 * radius;
 	    }
 	    else if (new_pos[1] + 2 * radius > rec->getY() + rec->getHeight() && new_pos[1] < rec->getY() + rec->getHeight())
 	    {
@@ -148,8 +147,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 			// Bottom collision
 			norm[0] = 0;
 			norm[1] = 1; // tang = [1, 0]
-			new_pos[1] = rec->getY() + rec->getHeight();
-			//new_cel[0] = (-2*radius*new_rotZ + 5*new_cel[0])/7;
+			//new_pos[1] = rec->getY() + rec->getHeight();
 	    }
 	}
 	// Horizontal collisions :
@@ -162,8 +160,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 			// Left collision
 			norm[0] = -1;
 			norm[1] = 0; // tang = [0, 1]
-			new_pos[0] = rec->getX() - radius * 2;
-			//new_cel[1] = (-2*radius*new_rotZ + 5*new_cel[1])/7;
+			//new_pos[0] = rec->getX() - radius * 2;
 	    }
 	    else if (new_pos[0] + 2 * radius > rec->getX() + rec->getWidth() && new_pos[0] < rec->getX() + rec->getWidth())
 	    {
@@ -171,8 +168,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 			// Right collision
 			norm[0] = 1;
 			norm[1] = 0; // tang = [0,-1]
-			new_pos[0] = rec->getX() + rec->getWidth();
-			//new_cel[1] = (2*radius*new_rotZ + 5*new_cel[1])/7;
+			//new_pos[0] = rec->getX() + rec->getWidth();
 	    }
 	}
 	else
@@ -225,8 +221,6 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 		{
 			norm[0] = a / c;
 			norm[1] = b / c;
-			new_pos[0] += norm[0];
-			new_pos[1] += norm[1];
 		}
 	}
 
@@ -235,10 +229,13 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 		other_cel[0] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[0];
 		other_cel[1] = (rec->getCelX() * norm[0] + rec->getCelY() * norm[1]) * norm[1];
 
+		new_pos[0] += norm[0];
+		new_pos[1] += norm[1];
+
 	    getTang(norm, tang);
 	    new_rotZ = (2 * radius * new_rotZ - 5 * (new_cel[0] * tang[0] + new_cel[1] * tang[1] - other_cel[0] * tang[0] - other_cel[1]*tang[1])) / (7 * radius);
-	    a = (-1) * BOUNCE_COEF * (new_cel[0] * norm[0] + new_cel[1] * norm[1]);
-		b = (1 + BOUNCE_COEF * (other_cel[0] * norm[0] + other_cel[1] * norm[1]));
+	    a = (-1) * B_R_BOUNCE_COEF * (new_cel[0] * norm[0] + new_cel[1] * norm[1]);
+		b = (1 + B_R_BOUNCE_COEF * (other_cel[0] * norm[0] + other_cel[1] * norm[1]));
 	    for (i = 0; i < 2; i++)
 	    {
 			new_cel[i] = (a+b) * norm[i] - rotZ * radius * tang[i];
