@@ -10,7 +10,7 @@ void Rectangle::draw(sf::RenderWindow *win) const {
   int r,g,b;
   color.getRGB(r,g,b);
   sf::RectangleShape shape(sf::Vector2f(width, height));
-  if (isCollided) shape.setFillColor(sf::Color(r - 100, g - 100, b - 100));
+  if (isCollided) shape.setFillColor(sf::Color(r / 2, g / 2, b / 2));
   else shape.setFillColor(sf::Color(r, g, b));
   shape.setPosition(pos[0],pos[1]);
   win->draw(shape);

@@ -21,9 +21,9 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 	//addRect(new Rectangle(width-10,0,100,height,255,0,0, rand()%100, rand()%100));
 	//addRect(new Rectangle(0,height-10,width,100,255,0,0, rand()%100, rand()%100));
 
-	addTrig(new Triangle_Points_Bonus(100,100,0,20,0,0, true));
+	addTrig(new Triangle_Points_Bonus(100,100,0,20,0,0, 10, true));
 
-	addCirc(new Circle(std::rand()%500,0,0,20+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100+100,std::rand()%100, std::rand()%20 - 10));
+	addCirc(new Circle(std::rand()%500,0,0,20+std::rand()%10,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100+100,std::rand()%100, std::rand()%20 - 10));
 
 	for (int i = 0 ; i < NB_BALLS-1 ; i++)
 		addCirc(new Circle(std::rand()%500,0,0,10+std::rand()%30,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100,std::rand()%100, std::rand()%20 - 10));

@@ -24,7 +24,7 @@ void Window::display(void)
     sf::Text gameOver;
     sf::Text points;
     Game_state state(Menu);
-    int selected(0);
+    int selected(0), pts(0);
 
     // Play !/Quit/Game Over :
     // Font : Vonique 64 by Sharkshock
@@ -73,6 +73,8 @@ void Window::display(void)
 		else if (state == Over)
 		{
 			_win->draw(gameOver);
+			points.setString("Points : " + std::to_string(pts));
+			_win->draw(points);
 		}
 		else if (state == Game)
 		{
@@ -172,8 +174,8 @@ void Window::display(void)
 					}
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 					{
-						state = Menu;
-						resetWorld();
+						state = Over;
+						pts = world->getPoints();
 					}
 				}
 			}
