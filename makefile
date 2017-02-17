@@ -4,12 +4,11 @@ SRC=$(wildcard src/*.cpp)
 OBJ=$(SRC:.cpp=.o)
 
 ifeq (${OS}, Windows_NT)
-	#SFMLDIR=./SFML_Windows_x64
 	SFMLDIR=./SFML_Windows_Sources
 	DEL=del src\*.o $(TARGET)
 else
 	#SFMLDIR=./SFML_GNU_Linux
-	DEL_ARGS=rm -f $(OBJ) $(TARGET) src/*~ include/*~ *~
+	DEL=rm -f $(OBJ) $(TARGET) src/*~ include/*~ *~
 endif
 
 #-- compiler/linker settings --
