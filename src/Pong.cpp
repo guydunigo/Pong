@@ -21,8 +21,6 @@ Pong::Pong(int _width, int _height, float _gravityX, float _gravityY): width(_wi
 	//addRect(new Rectangle(width-10,0,100,height,255,0,0, rand()%100, rand()%100));
 	//addRect(new Rectangle(0,height-10,width,100,255,0,0, rand()%100, rand()%100));
 
-	addTrig(new Triangle_Points_Bonus(100,100,0,20,0,0, 10, false));
-
 	addCirc(new Circle(std::rand()%500,0,0,20+std::rand()%10,std::rand()%255,std::rand()%255,std::rand()%255,std::rand()%100+100,std::rand()%100, std::rand()%20 - 10));
 
 	for (int i = 0 ; i < NB_BALLS-1 ; i++)
@@ -90,8 +88,40 @@ void Pong::addTrig(Triangle* trig) {
 }
 
 void Pong::step(float dt) {
+	int r = rand()%PROBA_BONUS_MALUS;
+	switch (r)
+	{
+		case 0:
+			addTrig(new Triangle_Points_Bonus(ARGRS_BONUS_MALUS));
+			break;
+		case 1:
+			addTrig(new Triangle_Points_Malus(ARGRS_BONUS_MALUS));
+			break;
+		case 2:
+			addTrig(new Triangle_Cel_Bonus(ARGRS_BONUS_MALUS));
+			break;
+		case 3:
+			addTrig(new Triangle_Cel_Malus(ARGRS_BONUS_MALUS));
+			break;
+		case 4:
+			addTrig(new Triangle_Size_Bonus(ARGRS_BONUS_MALUS));
+			break;
+		case 5:
+			addTrig(new Triangle_Size_Malus(ARGRS_BONUS_MALUS));
+			break;
+		default:
+			break;
+	}
 	for (unsigned int i = 0 ; i < shapes.size() ; i++)
 		shapes[i]->step(dt, gravityX, gravityY, rects, circs, trigs, width, height);
+	for (unsigned int i = 0 ; i < trigs.size() ; i++)
+		if (trigs[i]->getIsOff())
+		{
+			for (unsigned int j = 0 ; j < shapes.size() ; j++)
+				if (shapes[j] == trigs[i])
+					shapes.erase(shapes.begin() + j);
+			trigs.erase(trigs.begin() + i);
+		}
 }
 
 void Pong::resetPoints(void) {

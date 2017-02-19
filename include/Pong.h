@@ -7,6 +7,11 @@
 #include "Circle.h"
 #include "Triangle.h"
 #include "Triangle_Points_Bonus.h"
+#include "Triangle_Points_Malus.h"
+#include "Triangle_Cel_Bonus.h"
+#include "Triangle_Cel_Malus.h"
+#include "Triangle_Size_Bonus.h"
+#include "Triangle_Size_Malus.h"
 
 class Pong {
 	private:

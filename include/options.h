@@ -25,19 +25,27 @@
 
 // Points coefs :
     #define BAR_BONUS       10
-    #define WALLS_MALUS     -5
+    #define WALLS_MALUS     -10
     #define TRIG_BONUS      10
 
 // Triangles powerups and traps :
-    #define TRIG_CEL_MAL_COLOR  210,100,0
-    #define TRIG_CEL_BON_COLOR  200,200,255
-    #define TRIG_POINTS_MAL_COLOR     255,0,0
-    #define TRIG_POINTS_BON_COLOR     0,255,0
+    #define PROBA_BONUS_MALUS   1000
+    #define ARGRS_BONUS_MALUS   rand()%(width/2)+width/4,rand()%(height/2)+height/4,0,20,rand()%200-100,rand()%200-100, rand()%8-4, false
 
-    #define TRIG_CEL_MAL    2f
+    #define TRIG_CEL_BON_COLOR  200,200,255 // Grey/White
+    #define TRIG_CEL_MAL_COLOR  210,100,0 // Orange
+    #define TRIG_POINTS_BON_COLOR     0,255,0 // Green
+    #define TRIG_POINTS_MAL_COLOR     255,0,0 // Red
+    #define TRIG_SIZE_BON_COLOR     0,200,200 // Cyan
+    #define TRIG_SIZE_MAL_COLOR     200,200,0 // Yellow
+
     #define TRIG_CEL_BON    .5f
+    #define TRIG_CEL_MAL    2
 
     #define TRIG_POINTS_BON 50
-    #define TRIG_POINTS_MAL -30
+    #define TRIG_POINTS_MAL -50
+
+    #define TRIG_SIZE_BON .5f
+    #define TRIG_SIZE_MAL 2
 
     //...
