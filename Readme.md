@@ -1,3 +1,9 @@
+This is a temporary file
+========================
+It will be reformated and translated
+------------------------------------
+
+<br/><br/>
     --- Pong 2000 ---
 
 -------- Informations diverses --------
