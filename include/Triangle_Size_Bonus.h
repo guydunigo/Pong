@@ -15,7 +15,8 @@ class Triangle_Size_Bonus: public Triangle
             isOff = false;
         }
         inline void effects(Circle* circ) {
-            circ->setRadius(circ->getRadius() * TRIG_SIZE_BON);
+            float newSize = circ->getRadius() * TRIG_SIZE_BON;
+            if (newSize < 200 && newSize > 5) circ->setRadius(newSize);
             isOff = true;
         }
 };
