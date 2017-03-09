@@ -30,7 +30,7 @@
 
 // Triangles powerups and traps :
     #define PROBA_BONUS_MALUS   1000
-    #define ARGRS_BONUS_MALUS   rand()%(width/2)+width/4,rand()%(height/2)+height/4,0,20,rand()%200-100,rand()%200-100, rand()%8-4, false
+    #define ARGS_BONUS_MALUS   rand()%(width/2)+width/4,rand()%(height/2)+height/4,0,20,rand()%200-100,rand()%200-100, rand()%8-4, false
 
     #define TRIG_CEL_BON_COLOR  200,200,255 // Grey/White
     #define TRIG_CEL_MAL_COLOR  210,100,0 // Orange

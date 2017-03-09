@@ -45,7 +45,7 @@ void Circle::step(float dt, float gravityX, float gravityY, std::vector<Rectangl
 		new_pos[i] = pos[i] + new_cel[i] * dt;
 		norm[i] = tang[i] = 0;
     }
-    alpha += rotZ*dt*360/(3.14159*2);
+    alpha += rotZ*dt*180/PI;
     if (alpha > 360) alpha -= 360;
     if (alpha < -360) alpha += 360;
 

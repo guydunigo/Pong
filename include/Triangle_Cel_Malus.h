@@ -15,8 +15,8 @@ class Triangle_Cel_Malus: public Triangle
             isOff = false;
         }
         inline void effects(Circle* circ) {
-            circ->setCelX(circ->getPoints() * TRIG_CEL_MAL);
-            circ->setCelY(circ->getPoints() * TRIG_CEL_MAL);
+            circ->setCelX(circ->getCelX() * TRIG_CEL_MAL);
+            circ->setCelY(circ->getCelY() * TRIG_CEL_MAL);
             isOff = true;
         }
 };

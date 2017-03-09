@@ -15,8 +15,8 @@ class Triangle_Cel_Bonus: public Triangle
             isOff = false;
         }
         inline void effects(Circle* circ) {
-            circ->setCelX(circ->getPoints() * TRIG_CEL_BON);
-            circ->setCelY(circ->getPoints() * TRIG_CEL_BON);
+            circ->setCelX(circ->getCelX() * TRIG_CEL_BON);
+            circ->setCelY(circ->getCelY() * TRIG_CEL_BON);
             isOff = true;
         }
 };

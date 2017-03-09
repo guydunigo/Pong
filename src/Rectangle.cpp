@@ -27,7 +27,7 @@ void Rectangle::step(float dt, float gravityX, float gravityY, std::vector<Recta
 	float new_pos[2] = {pos[0], pos[1]};
 	float new_cel[2] = {cel[0], cel[1]};
 	
-	for (int i = 0 ; i < 2 ; i++) {
+	for (i = 0 ; i < 2 ; i++) {
 		//new_cel[i] += gravity[i]*dt;
 		new_pos[i] += new_cel[i]*dt;
 	}
@@ -73,7 +73,7 @@ void Rectangle::step(float dt, float gravityX, float gravityY, std::vector<Recta
     }
 
 	// Actually updates values
-	for (int i = 0 ; i < 2 ; i++) {
+	for (i = 0 ; i < 2 ; i++) {
 		cel[i] = new_cel[i];
 		pos[i] = new_pos[i];
 	}

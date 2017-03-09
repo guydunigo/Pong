@@ -92,22 +92,22 @@ void Pong::step(float dt) {
 	switch (r)
 	{
 		case 0:
-			addTrig(new Triangle_Points_Bonus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Points_Bonus(ARGS_BONUS_MALUS));
 			break;
 		case 1:
-			addTrig(new Triangle_Points_Malus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Points_Malus(ARGS_BONUS_MALUS));
 			break;
 		case 2:
-			addTrig(new Triangle_Cel_Bonus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Cel_Bonus(ARGS_BONUS_MALUS));
 			break;
 		case 3:
-			addTrig(new Triangle_Cel_Malus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Cel_Malus(ARGS_BONUS_MALUS));
 			break;
 		case 4:
-			addTrig(new Triangle_Size_Bonus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Size_Bonus(ARGS_BONUS_MALUS));
 			break;
 		case 5:
-			addTrig(new Triangle_Size_Malus(ARGRS_BONUS_MALUS));
+			addTrig(new Triangle_Size_Malus(ARGS_BONUS_MALUS));
 			break;
 		default:
 			break;

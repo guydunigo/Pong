@@ -33,7 +33,7 @@ void Triangle::step(float dt, float gravityX, float gravityY, std::vector<Rectan
     {
         pos[0] += cel[0]*dt;
         pos[1] += cel[1]*dt;
-        alpha += rotZ*dt*360/(3.14159*2);
+        alpha += rotZ*dt*180/PI;
         if (alpha > 360) alpha -= 360;
         else if (alpha < 360) alpha += 360;
         if (pos[0] < 2*radius || pos[0] > width || pos[1] < 2*radius || pos[1] > height)
