@@ -10,7 +10,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "intelliSenseMode": "gcc-x64"
         },
         {
             "name": "Win32",
@@ -21,7 +22,9 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "intelliSenseMode": "msvc-x64"
         }
-    ]
+    ],
+    "version": 4
 }
